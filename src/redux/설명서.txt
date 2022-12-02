@@ -1,0 +1,1 @@
+redux는 reducer, store를 저장하고 관리하는 폴더입니다.

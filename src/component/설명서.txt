@@ -1,0 +1,2 @@
+component는 공통적으로 사용되는 button, header, footer 등을
+저장하고 관리하는 폴더입니다.
