@@ -1,11 +1,12 @@
 import Layout from "../component/layout/Layout";
 import "./MainPage.css"
 import React from "react";
+import ProductListPage from "../productList/productList";
 
 const MainPage = () => {
     return (
         <Layout>
-           <h1>hi</h1>
+           <ProductListPage></ProductListPage>
         </Layout>
     )
 }
