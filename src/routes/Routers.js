@@ -10,9 +10,8 @@ function Routers() {
         <div>
         <BrowserRouter>
             <Routes>
-                <Route path = "/*" element = {<Test/>} />
+                <Route path = "/*" element = {<MainPage/>} />
                 <Route path = "/signUp" element = {<SignUp/>} />
-                <Route path = "/main" element = {<MainPage/>} />
                 <Route path = "/login" element = {<Login/>} />
             </Routes>
         </BrowserRouter>
