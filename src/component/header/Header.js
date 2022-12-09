@@ -1,4 +1,6 @@
 import "./Header.css"
+import Category from "../../categorySearch/category";
+import CategoryPage from "../../categorySearch/category";
 
 const Header = () => {
     return(
@@ -12,6 +14,9 @@ const Header = () => {
                 </div>
                 <div>
                     <h2>alarm</h2>
+                </div>
+                <div>
+                    <CategoryPage></CategoryPage>
                 </div>
             </div>
         </header>

@@ -10,7 +10,7 @@ import axios from "axios";
 import {useSelector, useDispatch, batch} from "react-redux";
 
 function ProductListPage() {
-    // const dispatchLocation = useDispatch();
+    const dispatchLocation = useDispatch();
     let [latitude, setLatitude] = useState(0);
     let [longitude, setLongitude] = useState(0);
 
@@ -78,8 +78,8 @@ function ProductListPage() {
 
 
                     // batch(() => {
-                    // dispatchLocation({type: "LATITUDE", payload: latitude})
-                    // dispatchLocation({type: "LONGITUDE", payload: longitude})
+                    dispatchLocation({type: "LATITUDE", payload: latitude})
+                    dispatchLocation({type: "LONGITUDE", payload: longitude})
 
 
                     // })
@@ -111,8 +111,8 @@ function ProductListPage() {
 
 
                     // batch(() => {
-                    // dispatchLocation({type: "LATITUDE", payload: latitude})
-                    // dispatchLocation({type: "LONGITUDE", payload: longitude})
+                    dispatchLocation({type: "LATITUDE", payload: latitude})
+                    dispatchLocation({type: "LONGITUDE", payload: longitude})
 
 
                     // })
