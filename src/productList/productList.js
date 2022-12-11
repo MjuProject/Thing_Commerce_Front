@@ -23,9 +23,9 @@ function ProductListPage() {
     const navigate = useNavigate();
 
 
-    // const toProductViewDetailsPage = (itemId) => {
-    //     navigate("/ProductViewDetails" , {state : itemId});
-    // }
+    const toProductViewDetailsPage = (itemId) => {
+        navigate("/ProductViewDetails" , {state : itemId});
+    }
     const increasePage = () => {
         setPage(++page);
 
@@ -197,7 +197,7 @@ function ProductListPage() {
 
 
                                             <span> <h2 className="title"
-                                                       // onClick={ () => {toProductViewDetailsPage(item.itemId) }}
+                                                       onClick={ () => {toProductViewDetailsPage(item.itemId) }}
                                             >
                                         제목: {item.itemTitle}</h2>
 
@@ -207,7 +207,7 @@ function ProductListPage() {
                                                         <p className="rental">대여중</p>:
                                                         <p className="reservation">예약중</p>}</span>
                                             <p>게시일: {format(new Date(item.createdDate))}</p>
-                                            <p>대여료: {item.price}</p>
+                                            <p>가격: {item.price}</p>
                                             <p>아이템 위치: {item.itemAddress}</p>
                                             {/*<p>대여상태: {item.contractStatus}</p>*/}
 

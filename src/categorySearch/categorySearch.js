@@ -1,13 +1,13 @@
 import React, {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import "./categorySearch.css";
-// import store from "../store";
+import store from "../store";
 import {Button, Card, Col, Row} from "antd";
 import {HeartFilled, HeartOutlined} from "@ant-design/icons";
 // import HeaderPage from "../header/header";
 import ProductListPage from "../productList/productList";
 import {useSelector, useDispatch, shallowEqual} from "react-redux";
-// import ProductViewDetailsPage from "../productViewDetails/productViewDetails";
+import ProductViewDetailsPage from "../productViewDetails/productViewDetails";
 import {Link, useNavigate} from "react-router-dom";
 import {isDisabled} from "@testing-library/user-event/dist/utils";
 
