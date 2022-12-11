@@ -5,6 +5,7 @@ import Login from "../login/Login"
 import SignUp from "../signUp/SignUp"
 import Test from "../test/test"
 import Category from "../categorySearch/category";
+import ProductViewDetails from "../productViewDetails/productViewDetails";
 
 function Routers() {
     return(
@@ -15,6 +16,7 @@ function Routers() {
                 <Route path = "/signUp" element = {<SignUp/>} />
                 <Route path = "/login" element = {<Login/>} />
                 <Route path = "/category" element = {<Category/>}/>
+                <Route path = "/productViewDetails" element = {<ProductViewDetails/>}/>
             </Routes>
         </BrowserRouter>
         </div>
