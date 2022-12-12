@@ -5,7 +5,7 @@ import "./Layout.css"
 const Layout = (props) => {
     return (
         <div className = "basicLayout">
-            <Header />
+            <Header className = "header" />
             <main className="mainLayout">
                 {props.children}
             </main>
