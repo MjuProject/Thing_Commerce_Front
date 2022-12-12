@@ -1,0 +1,33 @@
+.write_container {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    height: 100%;
+}
+.write_money{
+    width: 300px;
+}
+
+.write_wrap{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.h1{
+    padding-left: 10%;
+    margin-bottom: 10%;
+}
+.write_wrap span{
+    min-width: 110px;
+}
+.title{
+    width: 300px;
+}
+.content{
+    width: 300px;
+}
+.button{
+    display: flex;
+    justify-content: end;
+}

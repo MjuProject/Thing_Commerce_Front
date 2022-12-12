@@ -1,29 +1,48 @@
-.myPageWrap{
-    margin-left: 8%;
-    margin-right: 8%;
-}
-.pageTitle{
-    margin-left: 10%;
-    font-weight: bolder;
-    font-size: large;
-}
-.userCard{
-    background-color: #fcf7f7;
-}
-.left{
-    width: 50%;
-    height: 100%;
-    margin-left: 10%;
-}
-.user{
-    display: flex;
+.myPageWrap {
     width: 100%;
-    margin-bottom: 2%;
+    max-width: 1280px;
+    margin: 0px auto;
+    padding: 28px 40px 38px;
+}
+.userCard {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.userCard > * {
+    flex: 0 0 47%;
+    max-width: 47%;
+}
+.user {
+    display: flex;
 
 }
+
+.left {
+    position: relative;
+}
+.imgBtn{
+    margin-top: 15%;
+}
+
+.userPhoto{
+    width: 250px;
+    height: 250px;
+    box-shadow: rgb(4 0 0 / 3%) 0px 5px 10px 0px;
+}
+
+.userContent{
+    flex: 0 0 47%;
+    max-width: 47%;
+    font-size: 18px;
+    margin-left: 40%;
+}
+
 .userName{
     margin-bottom: 10%;
-    margin-top: 20%;
 }
 .usersNick {
     margin-bottom: 10%;
@@ -40,38 +59,6 @@
     margin-left: 18%;
     border : 1px solid black;
     height : 35px;
-
-}
-.imgBtn{
-    margin-top: 13%;
-    margin-left: 42%;
-    height: 10%;
-    background-color: #EFEFEF;
-    border : 1px solid black;
-}
-.imgOkBtn{
-    margin-left: 18%;
-    height: 10%;
-    background-color: #EFEFEF;
-    border : 1px solid black;
-}
-.userPhoto{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 250px;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: rgb(4 0 0 / 3%) 0px 5px 10px 0px;
-}
-.userContent{
-    font-size: 18px;
-    position: absolute;
-    margin-left: 40%;
 }
 
 .tab {

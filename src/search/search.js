@@ -1,5 +1,4 @@
 import React, {Fragment, useEffect, useState} from "react"
-import HeaderPage from "../header/header";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import "./search.css";
@@ -135,10 +134,6 @@ function SearchPage() {
 
     return(
         <Fragment>
-
-            <header>
-                <HeaderPage></HeaderPage>
-            </header>
 
             <main>
 

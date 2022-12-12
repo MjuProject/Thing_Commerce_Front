@@ -6,16 +6,6 @@
     display: flex;
     justify-content: center;
   }
-  .snsSignup_container {
-    padding-top: 3%;
-    display: flex;
-    justify-content: center;
-  }
-  .snsSignUp_Header {
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-  }
   .signUp_Header {
     display: flex;
     justify-content: center;
