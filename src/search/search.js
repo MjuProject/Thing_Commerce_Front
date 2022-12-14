@@ -1,4 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
+import Layout from "../component/layout/Layout";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import "./search.css";
@@ -41,7 +42,7 @@ function SearchPage() {
     //현재 위도,경도, sorting, 검색어, 페이지 값으로 아이템 리스트 가져오기
     const getSearchItem = () => {
         const option = {
-            url : "/items/search-keyword?page="+page+'&orderType='+orderType+'&query='+searchText+'&longitude='+longitude+'&latitude='+latitude,
+            url : "http://localhost:8000/items/search?page="+page+'&orderType='+orderType+'&query='+searchText+'&longitude='+longitude+'&latitude='+latitude,
             method: 'GET',
             headers: {
                  Authorization: 'Bearer ' + sessionStorage.getItem("token"),
@@ -61,7 +62,7 @@ function SearchPage() {
 
     const addSearchItem = () => {
         const option = {
-            url : "/items/search-keyword?page="+page+'&orderType='+orderType+'&query='+searchText+'&longitude='+longitude+'&latitude='+latitude,
+            url : "http://localhost:8000/items/search-keyword?page="+page+'&orderType='+orderType+'&query='+searchText+'&longitude='+longitude+'&latitude='+latitude,
             method: 'GET',
             headers: {
                 // Authorization: 'Bearer ' + sessionStorage.getItem("token"),
@@ -81,7 +82,7 @@ function SearchPage() {
 
     //찜하기가 안된상태에서 찜하기를 눌렀을때
     const addBasket = (itemId,isLike) => {
-        axios.post("/baskets?itemId="+itemId,
+        axios.post("http://localhost:8000/baskets?itemId="+itemId,
             {},{headers: {
                     Authorization: 'Bearer ' + localStorage.getItem("token")
                 }}
@@ -133,7 +134,7 @@ function SearchPage() {
     }
 
     return(
-        <Fragment>
+        <Layout>
 
             <main>
 
@@ -219,7 +220,7 @@ function SearchPage() {
                 <Button className="addButton" onClick={increasePage}>더보기</Button>
             }
 
-        </Fragment>
+        </Layout>
     )
 }
 export default SearchPage;

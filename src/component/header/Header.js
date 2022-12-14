@@ -70,41 +70,46 @@ const Header = () => {
 
     return (
         <div className="header_container">
-            
+
 
             <div className="top">
                 {/* NavLink 이미지 클릭시 화면이동 */}
                 <NavLink to={"/MainPage"} >
-                    <img src={require("../../assets/ThingCommerce.png")} className="img_logo" />
+                    <img src={require("../../assets/ThingCommerce.png")} className="img_logo"
+                        style={{
+                            width: 200,
+                            height: 100
+                        }}
+                    />
                 </NavLink>
 
-            
 
-            <div className="links">
-                {logged === false ?
-                    <span className="link_text"> </span>
-                    :
-                    <span className="link_text"> {nickName} 님 환영합니다.</span>
-                }
 
-                {logged === false ?
-                    <Link to='/login' className="link_text">로그인/회원가입</Link>
-                    :
-                    <Link to='/' onClick={onLogout} className="link_text">로그아웃</Link>
-                }
+                <div className="links">
+                    {logged === false ?
+                        <span className="link_text"> </span>
+                        :
+                        <span className="link_text"> {nickName} 님 환영합니다.</span>
+                    }
 
-                {logged === false ?
-                    <Link to='/' onClick={isLogin} className="link_text">마이페이지</Link>
-                    :
-                    <Link to='/MyPage' onClick={isLogin} className="link_text">마이페이지</Link>
-                }
-                {/*???님 환영합니다.*/}
+                    {logged === false ?
+                        <Link to='/login' className="link_text">로그인/회원가입</Link>
+                        :
+                        <Link to='/' onClick={onLogout} className="link_text">로그아웃</Link>
+                    }
 
-                {/* 검색창 껍데기 */}
-                <div className='SearchBar'>
-                    <SearchBar />
+                    {logged === false ?
+                        <Link to='/' onClick={isLogin} className="link_text">마이페이지</Link>
+                        :
+                        <Link to='/MyPage' onClick={isLogin} className="link_text">마이페이지</Link>
+                    }
+                    {/*???님 환영합니다.*/}
+
+                    {/* 검색창 껍데기 */}
+                    <div className='SearchBar'>
+                        <SearchBar />
+                    </div>
                 </div>
-            </div>
 
             </div>
 
