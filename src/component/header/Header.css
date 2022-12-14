@@ -1,12 +1,12 @@
 .header_container {
+    width: 100%;
+    max-width: 1280px;
     display: flex;
+    margin: 0px auto;
     flex-direction: column;
-    background-color: aqua;
-    
 }
 .top {
     display: flex;
     justify-content: center;
     -webkit-box-pack: center;
-    flex-direction: row;
 }
