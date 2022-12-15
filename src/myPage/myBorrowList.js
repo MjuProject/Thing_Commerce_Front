@@ -85,7 +85,7 @@ function MyBorrowListPage() {
                                     <p>가격: {borrowitem.itemDetailResponseDTO.item.price}</p>
                                     <p>아이템 위치: {borrowitem.itemDetailResponseDTO.item.itemAddress}</p>
 
-                                    <img className="phoneImage" src={"http://localhost:8000" + borrowitem.itemDetailResponseDTO.item.itemPhotoUri}/>
+                                    <img className="phoneImage" src={"http://localhost:8000" + borrowitem.itemDetailResponseDTO.item.itemPhotoUri[0]}/>
 
                                 </Card>
                             </Col>
