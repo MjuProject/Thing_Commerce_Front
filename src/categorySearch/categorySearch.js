@@ -235,7 +235,7 @@ function CategorySearchPage()  {
                                         <p>아이템 위치: {categoryitem.itemAddress}</p>
 
 
-                                        <img className="phoneImage" src={categoryitem.itemPhoto}/>
+                                        <img className="phoneImage" src={'http://localhost:8000' + categoryitem.itemPhoto}/>
 
 
 
