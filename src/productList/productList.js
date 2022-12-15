@@ -202,11 +202,9 @@ function ProductListPage() {
                                             >
                                         제목: {item.itemTitle}</h2>
 
-                                                {item.status === "0" ?
-                                                    <p ></p>:
-                                                    item.status === "2" ?
-                                                        <p className="rental">대여중</p>:
-                                                        <p className="reservation">예약중</p>}</span>
+                                                {item.status === false ?
+                                                    <p className="rental">구매완료</p> :
+                                                        <p className="reservation">구매가능</p>}</span>
                                             <p>게시일: {format(new Date(item.createdDate))}</p>
                                             <p>가격: {item.price}</p>
                                             <p>아이템 위치: {item.itemAddress}</p>

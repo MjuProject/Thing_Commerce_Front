@@ -220,7 +220,7 @@ function ProductViewDetailsPage () {
 
             })
     }
-    const addContract = (itemId,index) => {
+    const addContract = () => {
 
         axios.post("http://localhost:8000/contracts/clients/me/items/"+itemId,
             {},{headers: {
