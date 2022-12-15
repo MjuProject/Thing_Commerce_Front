@@ -5,7 +5,7 @@ import Login from "../login/Login"
 import SignUp from "../signUp/SignUp"
 import Write from "../write/Write"
 import MyPage from "../myPage/MyPage"
-import SearchPage from "../search/Search"
+import SearchPage from "../search/earch"
 import Category from "../categorySearch/category";
 import ProductViewDetails from "../productViewDetails/productViewDetails";
 
