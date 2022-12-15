@@ -2,7 +2,7 @@
     /* 검색창 */
     width: 520px;
     height: 50px;
-    border: 2px solid black;
+    border: 2px solid #2171CC;
     display: flex;
     align-items: center;
 }
@@ -17,12 +17,12 @@
 .search_box button {
     /* 검색버튼 */
     flex: 1; /* search-box내부에서 1만큼의 크기를 차지(비율) */
-    height: 50px;
+    height: 51px;
     margin: 0;
     padding: 0;
     border: none;
     outline: none;
-    background: black;
+    background: #2171CC;
     color: #ffffff;
 }
 fieldset {
