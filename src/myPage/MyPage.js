@@ -11,12 +11,11 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Card, Divider, Space, Upload } from "antd";
 
 function MyPage() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [tabIndex, setTabIndex] = useState(0);
     const [name, setName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
     const [email, setEmail] = useState('');
-    const [trustPoint, setTrustPoint] = useState(0);
     const [ready, setReady] = useState(0);
     const [isSelect0, setIsSelect0] = useState(false);
     const [isSelect1, setIsSelect1] = useState(false);
@@ -36,7 +35,6 @@ function MyPage() {
             sessionStorage.setItem('client_index', response.data.data.clientIndex)
             console.log(response.data.data)
             setEmail(response.data.data.email)
-            setTrustPoint(response.data.data.trustPoint)
             setName(response.data.data.clientName)
             setPhoneNum(response.data.data.phoneNumber)
             console.log(response.data.data.trustPoint)
@@ -58,34 +56,33 @@ function MyPage() {
 
     }
 
-    // const onSubmit = () => {
-    //     const clientIndex = sessionStorage.getItem('client_index');
-    //     console.log(clientIndex)
-    //     const option = {
-    //         url : "/clients/"+clientIndex+"/nickname",
-    //         method: 'PUT',
-    //         header: {
-    //             Authorization: 'Bearer ' + sessionStorage.getItem("token")
-    //         },
-    //         data: 'nickname=' + userNick
-    //     }
+    const onSubmit = () => {
+        const clientIndex = sessionStorage.getItem('client_index');
+        console.log(clientIndex)
+        const option = {
+            url : "http://localhost:8000/clients/"+clientIndex+"/nickname",
+            method: 'PUT',
+            header: {
+                Authorization: 'Bearer ' + sessionStorage.getItem("token")
+            },
+            data: 'nickname=' + userNick
+        }
 
-    //     axios(option)
-    //         .then(res=>{
-    //             if (res.status >= 200 && res.status <= 204) {
-    //                 setReady(0)
-    //                 dispatch({type: "NICKNAME", payload: userNick})
-    //                 console.log(res.data.message);
-    //             }
-    //         }).catch(res=>{
-    //         setReady(1)
-    //         alert(res.response.data.message);
-    //     });
-    // };
+        axios(option)
+            .then(res=>{
+                if (res.status >= 200 && res.status <= 204) {
+                    setReady(0)
+                    dispatch({type: "NICKNAME", payload: userNick})
+                    console.log(res.data.message);
+                }
+            }).catch(res=>{
+            setReady(1)
+            alert(res.response.data.message);
+        });
+    };
 
-    // const nickName = useSelector(state => state.nickName);
-    const nickName = ""
-    const [userNick, setUserNick] = useState("nickName");
+    const nickName = useSelector(state => state.nickName);
+    const [userNick, setUserNick] = useState(nickName);
 
     const nickNameChange = (e) => {
         console.log(userNick)
@@ -94,10 +91,10 @@ function MyPage() {
     const onProfileChange = () => {
 
         const formData = new FormData();
-        imageAntList.forEach(image => formData.append("clientPhoto", image.originFileObj))
+        imageAntList.forEach(image => formData.append("image", image.originFileObj))
 
         const option = {
-            url: '/clients/client-photo',
+            url: 'http://localhost:8000/clients/me/client-photo',
             method: 'PUT',
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.getItem("token"),
@@ -180,7 +177,7 @@ function MyPage() {
                 <Card className="userCard">
                     <div className="user">
                         <div className="left">
-                            <img className="userPhoto" src={imageList} />
+                            <img className="userPhoto" src={"http://localhost:8000" + imageList} />
                             <Space
                                 direction="vertical"
                                 style={{
@@ -197,7 +194,7 @@ function MyPage() {
                                 >
                                     <Button type="primary" ghost className="imgBtn" icon={<UploadOutlined />}>대표사진 수정</Button>
                                 </Upload>
-                                <Button type="primary" ghost className="imgOkBtn" /*onClick={onProfileChange}*/>
+                                <Button type="primary" ghost className="imgOkBtn" onClick={onProfileChange}>
                                     확인
                                 </Button>
                             </Space>
@@ -216,9 +213,9 @@ function MyPage() {
 
                                 :
                                 <div className="usersNick">
-                                    <input type="text" maxLength="40" /*onChange={nickNameChange}*/ value={userNick} />
+                                    <input type="text" maxLength="40" onChange={nickNameChange} value={userNick} />
                                     <Button type="primary" ghost className="nickNameChangeBtn" onClick={() => {
-                                        /*onSubmit()*/ }}>수정</Button>
+                                        onSubmit() }}>수정</Button>
                                 </div>
                             }
 
@@ -226,11 +223,6 @@ function MyPage() {
 
                             <div className="userPhoneNum">휴대번호 : {phoneNum}</div>
 
-                            {/* {trustPoint == null ?
-                            <div>사용자 평점 : 받은 평점이 없습니다</div>
-                                :
-                            <div>사용자 평점 : {trustPoint}</div>
-                            } */}
                         </div>
 
                     </div>
