@@ -125,10 +125,11 @@ function ProductListPage() {
             })
 
     };
+
     //찜하기
     const addBasket = (itemId,index) => { //찜하기가 안된상태에서 찜하기를 눌렀을때
 
-        axios.post("http://localhost:8000/baskets?itemId="+itemId,
+        axios.post("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {},{headers: {
                     Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
@@ -145,7 +146,7 @@ function ProductListPage() {
 
     const delBasket = (itemId,index) => { //찜하기가 안된상태에서 찜하기를 눌렀을때
 
-        axios.delete("/baskets?itemId="+itemId,
+        axios.delete("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {headers: {
                     Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
@@ -211,7 +212,7 @@ function ProductListPage() {
                                             <p>아이템 위치: {item.itemAddress}</p>
                                             {/*<p>대여상태: {item.contractStatus}</p>*/}
 
-                                            <img className="phoneImage" src={item.itemPhoto}/>
+                                            <img className="phoneImage" src={"http://localhost:8000" + item.itemPhoto}/>
 
 
                                         </Card>

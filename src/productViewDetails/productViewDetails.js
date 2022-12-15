@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Form, Image, Input, Button, Divider, Tag, Row, Col, Card, Avatar, Rate, Modal} from 'antd';
+import Layout from "../component/layout/Layout";
 import "./productViewDetails.css";
 import axios from "axios";
 // import HeaderPage from "../header/header";
@@ -123,8 +124,6 @@ function ProductViewDetailsPage () {
     const navigate = useNavigate();  //수정부분
 
 
-
-
     const toProductViewDetailsPage = (itemId) => {     //수정부분
         console.log(itemId)    //수정부분
         setItemId(itemId);     //수정부분
@@ -133,26 +132,6 @@ function ProductViewDetailsPage () {
 
     }
 
-    const onClickChatButton = (itemId) => {
-        const token = sessionStorage.getItem('token');
-        if (token === null) {
-            alert("로그인 후 사용 가능합니다!")
-        }
-
-        else {
-            navigate("/chat",  {state : itemId});
-        }
-    }
-
-
-
-
-
-
-
-
-
-    // const navigate = useNavigate();
 
 
     function ItemProduct (){
@@ -163,10 +142,11 @@ function ProductViewDetailsPage () {
 
             .then((response) => {
                 if (response.status >= 200 && response.status <= 204) {
+                    console.log(response.data.data)
                     setProductDetailsView(response.data.data.item)
-                    setProductPicture(response.data.data.item.photos)
                     setProductBasket(response.data.data.basketCount)
-                    setProductThumbnail(response.data.data.item.photos[0].itemPhoto)
+                    setProductPicture(response.data.data.item.itemPhotoUri)
+                    setProductThumbnail(response.data.data.item.itemPhotoUri[0])
                     setProductOwnerInfo(response.data.data.ownerInfo)
                     setIsLike(response.data.data.isLike)
                     setImageList(response.data.data.ownerInfo.clientPhoto)
@@ -200,7 +180,7 @@ function ProductViewDetailsPage () {
 
 
     const addBasket = (itemId,isLike) => {
-        axios.post("http://localhost:8000/baskets?itemId="+itemId,
+        axios.post("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {},{headers: {
                     Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
@@ -220,9 +200,10 @@ function ProductViewDetailsPage () {
     }
 
 
+
     const delBasket = (itemId,isLike) => {
 
-        axios.delete("http://localhost:8000/baskets?itemId="+itemId,
+        axios.delete("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {headers: {
                     Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
@@ -239,55 +220,25 @@ function ProductViewDetailsPage () {
 
             })
     }
+    const addContract = (itemId,index) => {
+
+        axios.post("http://localhost:8000/contracts/clients/me/items/"+itemId,
+            {},{headers: {
+                    Authorization: 'Bearer ' + sessionStorage.getItem("token")
+                }}
 
 
-    //제품 리뷰
-    // const productReviewAxios = () => {       //수정부분
-    //     axios.get("http://localhost:8000/items/"+itemId+"/review?page=0")
-    //         .then((response) => {
-    //             if (response.status >= 200 && response.status <= 204) {
-    //                 setProductReview(response.data.data.content);
-    //             }
-    //         })
-    //         .catch(res => {
-    //             console.log("fail");
-    //         })
-    // }     //수정부분
-    //
-    // //판매자 리뷰
-    // const userReviewAxios = () => {        //수정부분
-    //     axios.get("http://localhost:8000/clients/"+itemId+"/review?page=0")       //수정부분
-    //         .then((response) => {
-    //             if (response.status >= 200 && response.status <= 204) {
-    //                 console.log(response.data.data.content)
-    //                 setUserReview(response.data.data.content);
-    //
-    //             }
-    //         })
-    //         .catch(res => {
-    //             console.log("fail");
-    //         })
-    // }
-    //수정부분
+        ).then(response => {
+            alert("구매가 완료되었습니다.")
+            navigate("/*")
 
-    //판매자 물품 보기
+        })
+            .catch(error => {
+                console.log(error.response);
+            })
+    }
 
-    // const userProductList = () => {                            //252줄부터 299줄까지 추가
-    //     // console.log(productDetailsView.ownerId);
-    //     axios.get("http://localhost:8000/items/owner/"+productDetailsView.ownerId+'?page='+page)
-    //         .then((response) => {
-    //             if (response.status >= 200 && response.status <= 204) {
-    //                 setUserProduct(response.data.data.content);
-    //                 setLast(response.data.data.last);
-    //                 console.log(response.data.data);
-    //                 console.log(last)
-    //                 console.log(userProductDetails);
-    //                 console.log(page);
-    //             }
-    //         })
-    //         .catch(res => {
-    //             console.log("fail");
-    //         })};
+
 
     const userProductListAdd = () => {
         console.log(productDetailsView.ownerId);
@@ -305,43 +256,6 @@ function ProductViewDetailsPage () {
             .catch(res => {
                 console.log("fail");
             })};
-
-//아이템에 대한 채팅방 정보 api, 아이템에 대한 채팅방 없을 시 새로 생성
-//     const itemChatInfo = async () => {
-//         try {
-//             const response = await axios.get("/chats/" + itemId, {headers: {Authorization: 'Bearer ' + sessionStorage.getItem("token")}})
-//             if (response.status >= 200 && response.status <= 204) {
-//                 console.log(response.data.data);
-//             }
-//
-//         }
-//         catch (e){
-//
-//             console.log(e);
-//
-//         }
-//
-//     };
-
-    // categoryBig: "",
-    //     categoryMiddle: "",
-    //     categorySmall: "",
-    //     categorySmall: "",
-    //     contractStatus: "",
-    //     create_date: "",
-    //     deposit: "",
-    //     endDate: "",
-    //     itemAddress: "",
-    //     itemContent: "",
-    //     itemLatitude: "",
-    //     itemLongitude: "",
-    //     itemQuality: "",
-    //     itemTitle: "",
-    //     ownerId: "",
-    //     price: "",
-    //     start_Date: "",
-    //     update_Date: "",
-    //     views: "",
 
     const deleteProduct = () => {
         axios.delete("http://localhost:8000/items/" + itemId,
@@ -407,12 +321,7 @@ function ProductViewDetailsPage () {
 
 
     return (        //334줄부터 396줄까지 수정사항
-        <div>
-
-            {/*<header>*/}
-            {/*    <HeaderPage></HeaderPage>*/}
-            {/*</header>*/}
-
+        <Layout>
 
             <Form className="productViewDetailsPage_container"
 
@@ -423,15 +332,15 @@ function ProductViewDetailsPage () {
 
                 <Image
                     className="ImageGroup"
-                    preview={{visible: false}}
-                    src={productThumbnail}
+                    preview={{ visible: false }}
+                    src={"http://localhost:8000" + productThumbnail}
                     onClick={() => setVisible(true)}
                 />
-                <div style={{display: 'none'}}>
-                    <Image.PreviewGroup preview={{visible, onVisibleChange: vis => setVisible(vis)}}>
+                <div style={{ display: 'none' }}>
+                    <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
                         {productPicture.map(picture => {
                                 return (
-                                    <Image src={picture.itemPhoto}/>
+                                    <Image src={ "http://localhost:8000" + picture} />
                                 )
                             }
                         )}
@@ -460,12 +369,16 @@ function ProductViewDetailsPage () {
                 <p>가격 : {productDetailsView.price}원</p>
                 <p>거래 지역 : {productDetailsView.itemAddress}</p>
                 <p>찜한 수 : {productBasket}회</p>
+                <Button className="contractButton" onClick={ () => {addContract()}}>
+                    물품 구매하기
+                </Button>
                 <Card className="productBasketCard">
                     해당 물품 찜하기
                     &nbsp;
                     {isLike ?
                         <HeartFilled className="heartFilledButton"
-                                     onClick={ () => {onClickBasketButton()}} /> :
+                                     onClick={ () => {onClickBasketButton()}}
+                        /> :
                         <HeartOutlined className="heartOutButton"
                                        onClick={ () => {onClickBasketButton()}} />}
 
@@ -519,6 +432,7 @@ function ProductViewDetailsPage () {
                     }}>
                         판매 물품 보기
                     </Button>
+
                     <Modal
                         title= {"<"+productOwnerInfo.nickname + "님이 판매중인 물품>"}
                         visible={isProductModalVisible}
@@ -554,36 +468,36 @@ function ProductViewDetailsPage () {
 
                 <Divider> </Divider>
 
-                <Form.Item
+                {/*<Form.Item*/}
 
-                    className="productReviews"
-                >
-                    <Card
-                        className="reviewCard"              //473줄부터 482줄까지 수정사항
-                        title="<제품 리뷰>">
-                        {productReview.map(review => {
-                                return (
-                                    <Card className="reviewCardChild" title={review.reviewTitle}>
-                                        <Rate className="rate" disabled defaultValue={review.reviewScore} />
-                                        <p className="reviewCardContent">{review.reviewContent}</p>
-                                        <p>리뷰 작성자 : {review.writer}</p>
-                                        <p>작성일자 : {format(new Date(review.createDate))}</p>
-                                    </Card>
-
-
-                                )              //수정부분
-                            }              //수정부분
-                        )}
+                {/*    className="productReviews"*/}
+                {/*>*/}
+                {/*    <Card*/}
+                {/*        className="reviewCard"              //473줄부터 482줄까지 수정사항*/}
+                {/*        title="<제품 리뷰>">*/}
+                {/*        {productReview.map(review => {*/}
+                {/*                return (*/}
+                {/*                    <Card className="reviewCardChild" title={review.reviewTitle}>*/}
+                {/*                        <Rate className="rate" disabled defaultValue={review.reviewScore} />*/}
+                {/*                        <p className="reviewCardContent">{review.reviewContent}</p>*/}
+                {/*                        <p>리뷰 작성자 : {review.writer}</p>*/}
+                {/*                        <p>작성일자 : {format(new Date(review.createDate))}</p>*/}
+                {/*                    </Card>*/}
 
 
-                    </Card>
-                </Form.Item>
+                {/*                )              //수정부분*/}
+                {/*            }              //수정부분*/}
+                {/*        )}*/}
+
+
+                {/*    </Card>*/}
+                {/*</Form.Item>*/}
 
 
             </Form>
 
             )}
-        </div>
+        </Layout>
 
     )
 

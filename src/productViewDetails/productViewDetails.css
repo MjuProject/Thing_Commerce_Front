@@ -37,6 +37,13 @@
 
 
 }
+.contractButton{
+    float : right;
+    bottom: 100px;
+}
+.ownerInfoCard{
+    margin-top : 30px;
+}
 .chattingButton {
     justify-content: center;
     display: flex;
