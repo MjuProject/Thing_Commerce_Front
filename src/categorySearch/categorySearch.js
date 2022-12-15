@@ -246,10 +246,7 @@ function CategorySearchPage()  {
                     </Row>
 
                 </div>
-            {last === true?
-                <Button className="addButton" disabled>더보기</Button>:
-                <Button className="addButton" onClick={increasePage}>더보기</Button>
-            }
+
 
 
 

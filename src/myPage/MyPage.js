@@ -3,10 +3,9 @@ import Layout from "../component/layout/Layout";
 import "./MyPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-// import MyLendListPage from "./myLendList";
-// import MyBorrowListPage from "./myBorrowList";
-// import MyBasketListPage from "./myBasketList";
-// import MyItemReview from "./myItemReview";
+import MyLendListPage from "./myLendList";
+import MyBorrowListPage from "./myBorrowList";
+import MyBasketListPage from "./myBasketList";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Card, Divider, Space, Upload } from "antd";
 
@@ -16,6 +15,7 @@ function MyPage() {
     const [name, setName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
     const [email, setEmail] = useState('');
+    
     const [ready, setReady] = useState(0);
     const [isSelect0, setIsSelect0] = useState(false);
     const [isSelect1, setIsSelect1] = useState(false);
@@ -33,15 +33,12 @@ function MyPage() {
             }
         }).then(response => {
             sessionStorage.setItem('client_index', response.data.data.clientIndex)
-            console.log(response.data.data)
             setEmail(response.data.data.email)
             setName(response.data.data.clientName)
             setPhoneNum(response.data.data.phoneNumber)
-            console.log(response.data.data.trustPoint)
             setImageList(response.data.data.clientPhoto)
         })
             .catch(error => {
-                console.log(error.response.data);
             })
     }
 
@@ -58,7 +55,6 @@ function MyPage() {
 
     const onSubmit = () => {
         const clientIndex = sessionStorage.getItem('client_index');
-        console.log(clientIndex)
         const option = {
             url : "http://localhost:8000/clients/"+clientIndex+"/nickname",
             method: 'PUT',
@@ -73,7 +69,6 @@ function MyPage() {
                 if (res.status >= 200 && res.status <= 204) {
                     setReady(0)
                     dispatch({type: "NICKNAME", payload: userNick})
-                    console.log(res.data.message);
                 }
             }).catch(res=>{
             setReady(1)
@@ -85,7 +80,6 @@ function MyPage() {
     const [userNick, setUserNick] = useState(nickName);
 
     const nickNameChange = (e) => {
-        console.log(userNick)
         setUserNick(e.target.value)
     }
     const onProfileChange = () => {
@@ -106,11 +100,11 @@ function MyPage() {
 
         axios(option)
             .then(res => {
-                console.log(res.data);
                 setImageAntList([])
                 getClientInfo();
 
             }).catch(res => {
+                console.log(res.response);
                 alert("대표사진을 올려주세요.");
             });
     };
@@ -128,7 +122,7 @@ function MyPage() {
             ),
             myContent: (
                 <div>
-
+                <MyLendListPage/>
                 </div>
             )
         },
@@ -140,10 +134,10 @@ function MyPage() {
                         setIsSelect0(false)
                         setIsSelect1(true)
                         setIsSelect2(false)
-                    }}>내 찜 목록 보기</li>
+                    }}>내가 산 물품 보기</li>
             ),
             myContent: (
-                <div></div>
+                <div><MyBorrowListPage/></div>
             )
         },
         {
@@ -154,10 +148,10 @@ function MyPage() {
                         setIsSelect0(false)
                         setIsSelect1(false)
                         setIsSelect2(true)
-                    }}>내 후기 보기</li>
+                    }}>내가 찜한 물품 보기</li>
             ),
             myContent: (
-                <div></div>
+                <div><MyBasketListPage/></div>
             )
         }
     ]

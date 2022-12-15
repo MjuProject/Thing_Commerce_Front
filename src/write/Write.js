@@ -378,14 +378,14 @@ function Write() {
                     </div>
 
                     <div className="write_wrap">
-                        <span>대여금</span>
+                        <span>판매금</span>
 
                         <Form.Item className="write_money"
                             name="price"
-                            rules={[{ required: true, message: '대여금을 입력해주세요!' }]}>
+                            rules={[{ required: true, message: '판매금을 입력해주세요!' }]}>
 
                             <Input
-                                type="number" placeholder="대여금을 입력해주세요"
+                                type="number" placeholder="판매금을 입력해주세요"
                                 onChange={setPriceChange}
                             />
                         </Form.Item>
@@ -446,7 +446,7 @@ function Write() {
 
                     <div className="button">
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" onClick={test} > 빌려주기 </Button>
+                            <Button type="primary" htmlType="submit" onClick={test} > 등록하기 </Button>
                         </Form.Item>
                     </div>
                 </Form>

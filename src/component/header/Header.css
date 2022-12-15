@@ -7,6 +7,20 @@
 }
 .top {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     -webkit-box-pack: center;
+}
+.link_text{
+    font-size: 12px;
+    margin : 2px;
+    text-decoration-line: none;
+}
+.categoryBar {
+    flaot:left;
+}
+.imagecontainer{
+    float:left;
+}
+.SearchBar{
+    padding-top: 1%;
 }

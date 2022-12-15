@@ -12,7 +12,7 @@ function SignUp() {
         axios.get("http://localhost:8000/clients/id-check?clientId=" + clientId)
             .then((response) => {
                 if (response.status >= 200 && response.status <= 204) {
-                    alert('사용가능한 닉네임 입니다!');
+                    alert('사용가능한 아이디입니다!');
                 }
             })
             .catch(res => {

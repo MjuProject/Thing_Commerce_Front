@@ -70,10 +70,8 @@ function SearchPage() {
         }
         axios(option)
             .then(res=>{
-                console.log(res.data);
                 setItemList(itemList.concat(res.data.data.content));
                 setItemNum(res.data.data.content.length)
-                console.log(longitude, latitude);
                 setLast(res.data.data.last);
             }).catch(res=>{
             alert(res.response.data.message);
@@ -81,27 +79,33 @@ function SearchPage() {
     }
 
     //찜하기가 안된상태에서 찜하기를 눌렀을때
-    const addBasket = (itemId,isLike) => {
-        axios.post("http://localhost:8000/baskets?itemId="+itemId,
+    const addBasket = (itemId,index) => { //찜하기가 안된상태에서 찜하기를 눌렀을때
+
+        axios.post("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {},{headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem("token")
+                    Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
+
+
         ).then(response => {
-            getSearchItem(latitude, longitude);
+            onSubmit(latitude, longitude, index);
+
         })
             .catch(error => {
                 console.log(error.response);
             })
     }
 
-    //찜하기가 안된상태에서 찜하기를 눌렀을때
-    const delBasket = (itemId,isLike) => {
-        axios.delete("/baskets?itemId="+itemId,
+    const delBasket = (itemId,index) => { //찜하기가 안된상태에서 찜하기를 눌렀을때
+
+        axios.delete("http://localhost:8000/baskets/clients/me/items/"+itemId,
             {headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem("token")
+                    Authorization: 'Bearer ' + sessionStorage.getItem("token")
                 }}
+
+
         ).then(response => {
-            getSearchItem(latitude, longitude);
+            onSubmit(latitude, longitude, index);
         })
             .catch(error => {
                 console.log(error.response);
@@ -194,18 +198,13 @@ function SearchPage() {
                                                onClick={ () => {toProductViewDetailsPage(item.itemId) }}>
                                         제목: {item.itemTitle}</h2>
 
-                                        {item.contractStatus === "GENERAL" ?
-                                            <p ></p>:
-                                            item.contractStatus === "RENTAL" ?
-                                                <p className="rental">대여중</p>:
-                                                <p className="reservation">예약중</p>}</span>
-                                    <p>게시일: {format(new Date(item.createDate))}</p>
-                                    <p>대여료: {item.price}</p>
-                                    <p>보증금: {item.deposit}</p>
-                                    {/*<p>아이템 위치: {item.itemAddress}</p>*/}
-                                    <p>대여상태: {item.contractStatus}</p>
+                                        {item.status === false ?
+                                            <p className="rental">구매완료</p> :
+                                            <p className="reservation">구매가능</p>}</span>
+                                    <p>게시일: {format(new Date(item.createdDate))}</p>
+                                    <p>가격: {item.price}</p>
 
-                                    <img className="phoneImage" src={item.itemPhoto}/>
+                                    <img className="phoneImage" src={"http://localhost:8000" + item.itemPhoto}/>
 
 
                                 </Card>
@@ -215,10 +214,7 @@ function SearchPage() {
                 </Row>
 
             </main>
-            {last === true ?
-                <Button className="addButton" disabled>더보기</Button> :
-                <Button className="addButton" onClick={increasePage}>더보기</Button>
-            }
+
 
         </Layout>
     )

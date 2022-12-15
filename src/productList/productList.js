@@ -220,10 +220,7 @@ function ProductListPage() {
                 </Row>
 
             </div>
-            {last === true?
-                <Button disabled>더보기</Button>:
-                <Button onClick={increasePage}>더보기</Button>
-            }
+
 
 
 
